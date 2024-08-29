@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-// import userRouter from './routes/user.routes';
+import userRouter from './routes/user.routes';
+import ConnectDb from './db/db';
 
 const app = express();
 
@@ -13,8 +14,13 @@ app.get('/', (req, res) => {
     res.send('Hello World! are you ready');
 });
 
-// app.use('/api/user',userRouter);
+app.use('/api/user',userRouter);
 
-app.listen(process.env.PORT,()=>{
-    console.log(`Server started at http://localhost:${process.env.PORT}`);
+ConnectDb().then(()=>{
+    app.listen(process.env.PORT,()=>{
+        console.log(`Server started at http://localhost:${process.env.PORT}`);
+    })
+}).catch(err=>{
+    console.log("Failed to start Server");
+    console.log(err);
 })
