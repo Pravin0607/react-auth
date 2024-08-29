@@ -4,6 +4,7 @@ import 'dotenv/config';
 import userRouter from './routes/user.routes';
 import ConnectDb from './db/db';
 import errorHandler from './util/middlewares/errorhandler';
+import authenticateUser from './util/middlewares/auth';
 
 const app = express();
 
@@ -11,11 +12,10 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 
-app.get('/', (req, res) => {
-    res.send('Hello World! are you ready');
-});
+app.use(authenticateUser);
 
 app.use('/api/user',userRouter);
+
 
 
 app.use(errorHandler);

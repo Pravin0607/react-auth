@@ -41,7 +41,7 @@ export const SignUpUser = async (
             // send jwt with response
             return res.status(200).json({
                 message: "User Created Succesfully!",
-                token: `bearer ${token}`,
+                token: `Bearer ${token}`,
             });
         }
     } catch (err) {
@@ -75,7 +75,7 @@ export const SignInUser = async (
                     );
                     return res.status(200).json({
                         message: "Logged in Succesfully.",
-                        token: `bearer ${token}`,
+                        token: `Bearer ${token}`,
                     });
              } else {
                 return res
