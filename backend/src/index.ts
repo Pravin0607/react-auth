@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import userRouter from './routes/user.routes';
 import ConnectDb from './db/db';
+import errorHandler from './util/middlewares/errorhandler';
 
 const app = express();
 
@@ -15,6 +16,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/user',userRouter);
+
+
+app.use(errorHandler);
 
 ConnectDb().then(()=>{
     app.listen(process.env.PORT,()=>{
