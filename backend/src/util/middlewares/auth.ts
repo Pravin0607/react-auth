@@ -27,8 +27,7 @@ const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
                         }
                         else
                         {
-                            req.body.uid=decoded.id;
-                            req.body.email=decoded.email;
+                            req.userId=decoded.id;
                            return next();
                         }
                     }
