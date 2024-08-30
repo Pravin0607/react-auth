@@ -34,7 +34,7 @@ export const SignUpUser = async (
             // save user to db
             const resp = await user.save();
             const token = jwt.sign(
-                { firstName, lastName, email, id: resp._id },
+                {id: resp._id },
                 jwtSecret,
                 { expiresIn: "1d" }
             );
@@ -65,9 +65,6 @@ export const SignInUser = async (
             if (result) {
                      const token = jwt.sign(
                         {
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            email: user.email,
                             id: user._id,
                         },
                         jwtSecret,
